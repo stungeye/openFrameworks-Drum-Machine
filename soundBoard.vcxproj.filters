@@ -31,12 +31,6 @@
     <ClCompile Include="..\..\..\addons\ofxMaxim\libs\stb_vorbis.c">
       <Filter>addons\ofxMaxim\libs</Filter>
     </ClCompile>
-    <ClCompile Include="src\sampler.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\sample.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -88,12 +82,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\addons\ofxMaxim\libs\stb_vorbis.h">
       <Filter>addons\ofxMaxim\libs</Filter>
-    </ClInclude>
-    <ClInclude Include="src\sampler.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="src\sample.h">
-      <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

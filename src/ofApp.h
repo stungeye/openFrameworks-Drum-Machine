@@ -2,7 +2,6 @@
 
 #include "ofMain.h"
 #include "ofxMaxim.h"
-#include "sample.h"
 
 class ofApp : public ofBaseApp {
 
@@ -43,5 +42,4 @@ private:
     float waveform[8192]; //make this bigger, just in case
     int waveIndex;
     vector<Key> keys;
-    Sample s;
 };
