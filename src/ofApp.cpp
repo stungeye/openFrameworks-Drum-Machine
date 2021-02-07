@@ -24,32 +24,9 @@ void ofApp::setup() {
     settings.bufferSize = bufferSize;
 
     soundStream.setup(settings);
-    std::cout << "Before\n";
-    s.load(ofToDataPath("roland_tr_909_1.wav"),false);
-    std::cout << "After\n";
 
-    shared_ptr<ofxMaxiSample> pianoE(new ofxMaxiSample);
-    pianoE->load(ofToDataPath("roland_tr_909_1.wav"), 1);
-    shared_ptr<ofxMaxiSample> pianoB(new ofxMaxiSample);
-    pianoB->load(ofToDataPath("roland_tr_909_2.wav"), 1);
-    shared_ptr<ofxMaxiSample> pianoG(new ofxMaxiSample);
-    pianoG->load(ofToDataPath("roland_tr_909_3.wav"), 1);
-    shared_ptr<ofxMaxiSample> pianoF(new ofxMaxiSample);
-    pianoF->load(ofToDataPath("roland_tr_909_4.wav"), 1);
-    shared_ptr<ofxMaxiSample> pianoH(new ofxMaxiSample);
-    pianoH->load(ofToDataPath("roland_tr_909_5.wav"), 1);
-    shared_ptr<ofxMaxiSample> pianoI(new ofxMaxiSample);
-    pianoI->load(ofToDataPath("roland_tr_909_6.wav"), 1);
-    shared_ptr<ofxMaxiSample> pianoJ(new ofxMaxiSample);
-    pianoJ->load(ofToDataPath("breakbeats_1_1.wav"), 1);
-
-    keys.push_back(Key(pianoE, 'a'));
-    keys.push_back(Key(pianoB, 's'));
-    keys.push_back(Key(pianoF, 'd'));
-    keys.push_back(Key(pianoG, 'f'));
-    keys.push_back(Key(pianoH, 'g'));
-    keys.push_back(Key(pianoI, 'h'));
-    keys.push_back(Key(pianoJ, 'p', true));
+    sampler.add('q', ofToDataPath("roland_tr_909_1.wav"), false);
+    sampler.add('w', ofToDataPath("breakbeats_1_1.wav"), true);
 }
 
 //--------------------------------------------------------------
@@ -73,18 +50,11 @@ void ofApp::audioOut(ofSoundBuffer& output) {
     std::size_t outChannels = output.getNumChannels();
 
     for (auto i = 0; i < output.getNumFrames(); i++) {
-        for (auto it = keys.begin(); it != keys.end(); it++) {
-            float value{0};
-            if (it->playing && it->loop) {
-                value = it->sample->playLoop(0, 1);
-            }
-            else if (!it->loop) {
-                value = it->sample->playOnce();
-            }
-            output[2 * i] += value;
-            output[2 * i + 1] += value;
-            waveform[waveIndex] = output[2 * i];
-        }
+        float value = sampler.playAll();
+        output[2 * i] += value;
+        output[2 * i + 1] += value;
+        waveform[waveIndex] = output[2 * i];
+
 
         if (waveIndex < (ofGetWidth() - 1)) {
             ++waveIndex;
@@ -97,23 +67,11 @@ void ofApp::audioOut(ofSoundBuffer& output) {
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key) {
-    for (auto it = keys.begin(); it != keys.end(); it++) {
-        if (it->triggerLetter == key && !it->playing) {
-            it->playing = true;
-            it->sample->trigger();
-        } else if (it->triggerLetter == key && it->loop) {
-            it->playing = false;
-        }
-    }
+    sampler.startPlaying(key);
 }
 
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key) {
-    for (auto it = keys.begin(); it != keys.end(); it++) {
-        if (it->triggerLetter == key && !it->loop) {
-            it->playing = false;
-        }
-    }
 }
 
 

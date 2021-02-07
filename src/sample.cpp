@@ -1,7 +1,17 @@
 #include "sample.h"
 
-void Sample::load(std::string path, bool loop) {
-    sample.load(path);
-    isPlaying = false;
-    isLoop = loop;
+Sample::Sample(std::string path, bool loop) :
+sample(new ofxMaxiSample),
+isPlaying(false),
+isLoop(false)
+{
+    sample->load(path, 1);
+}
+
+float Sample::play() {
+    return sample->playOnce();
+}
+
+void Sample::trigger() {
+    sample->trigger();
 }

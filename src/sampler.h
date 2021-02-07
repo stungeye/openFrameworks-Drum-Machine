@@ -1,4 +1,18 @@
 #pragma once
+#include <string>
+#include <map>
+#include "sample.h"
+
+class Sampler {
+public:
+    void startPlaying(int key);
+    void add(int key, std::string path, bool loop);
+    float playAll();
+private:
+    map<int, Sample> samples;
+};
+
+
 /*
 #include <map>
 #include <string>
