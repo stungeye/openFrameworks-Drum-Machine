@@ -8,10 +8,10 @@ isLoop(false)
     sample->load(path, 1);
 }
 
-float Sample::play() {
+float Sample::play() const {
     return sample->playOnce();
 }
 
-void Sample::trigger() {
+void Sample::trigger() const {
     sample->trigger();
 }
