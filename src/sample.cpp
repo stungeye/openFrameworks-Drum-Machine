@@ -1,17 +1,30 @@
 #include "sample.h"
 
 Sample::Sample(std::string path, bool loop) :
-sample(new ofxMaxiSample),
-isPlaying(false),
-isLoop(false)
+path(path),
+isLoop(loop),
+isLooping(false)
 {
-    sample->load(path, 1);
+    sample.load(path, 1);
+    sample.setPosition(1.0); // Move position to the end so it doesn't start playing.
 }
 
-float Sample::play() const {
-    return sample->playOnce();
+double Sample::play() {
+   if (isLoop) {
+        if (isLooping) {
+            return sample.playLoop(0, 1);
+        } else {
+            return 0;
+        }
+   } else {
+        return sample.playOnce();
+   }
 }
 
-void Sample::trigger() const {
-    sample->trigger();
+void Sample::trigger() {
+   if (isLoop) {
+       isLooping = !isLooping;
+   } 
+
+   sample.trigger();
 }

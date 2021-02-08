@@ -5,10 +5,12 @@
 class Sample {
 public:
     Sample(std::string path, bool loop);
-    float play() const;
-    void trigger() const;
+    Sample(const Sample& other) = delete;
+    double play();
+    void trigger();
 private:
-    shared_ptr<ofxMaxiSample> sample;
-    bool isPlaying;
+    ofxMaxiSample sample;
+    std::string path;
     bool isLoop;
+    bool isLooping;
 };

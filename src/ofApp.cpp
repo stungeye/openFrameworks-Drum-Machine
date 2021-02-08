@@ -67,11 +67,12 @@ void ofApp::audioOut(ofSoundBuffer& output) {
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key) {
-    sampler.startPlaying(key);
+    sampler.keyPressed(key);
 }
 
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key) {
+    sampler.keyReleased(key);
 }
 
 

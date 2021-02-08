@@ -1,15 +1,19 @@
 #pragma once
 #include <string>
-#include <map>
+#include <unordered_map>
 #include "sample.h"
 
 class Sampler {
 public:
-    void startPlaying(int key);
+    void keyPressed(int key);
+    void keyReleased(int key);
     void add(int key, std::string path, bool loop);
-    float playAll();
+    double playAll();
 private:
-    map<int, Sample> samples;
+    unordered_map<int, Sample> samples;
+    unordered_map<int, bool> keydown;
+    unordered_map<int, ofxMaxiSample> hits;
+    unordered_map<int, ofxMaxiSample> loops;
 };
 
 
