@@ -193,6 +193,7 @@
     <ClCompile Include="..\..\..\addons\ofxMaxim\libs\stb_vorbis.c" />
     <ClCompile Include="src\sample.cpp" />
     <ClCompile Include="src\sampler.cpp" />
+    <ClCompile Include="src\visualizer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\ofApp.h" />
@@ -208,6 +209,7 @@
     <ClInclude Include="..\..\..\addons\ofxMaxim\libs\stb_vorbis.h" />
     <ClInclude Include="src\sample.h" />
     <ClInclude Include="src\sampler.h" />
+    <ClInclude Include="src\visualizer.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="$(OF_ROOT)\libs\openFrameworksCompiled\project\vs\openframeworksLib.vcxproj">

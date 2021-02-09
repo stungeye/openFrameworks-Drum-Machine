@@ -26,6 +26,7 @@ void ofApp::setup() {
     soundStream.setup(settings);
 
     sampler.add('q', ofToDataPath("roland_tr_909_1.wav"), false);
+
     sampler.add('w', ofToDataPath("breakbeats_1_1.wav"), true);
 }
 
@@ -36,7 +37,9 @@ void ofApp::update() {
 
 //--------------------------------------------------------------
 void ofApp::draw() {
+    visualizer.draw();
     /////////////// waveform
+    /*
     ofTranslate(0, ofGetHeight() / 2);
     ofSetColor(0, 255, 0);
     ofFill();
@@ -44,6 +47,7 @@ void ofApp::draw() {
     for (int i = 1; i < (ofGetWidth() - 1); ++i) {
         ofDrawLine(i, waveform[i] * ofGetHeight() / 2., i + 1, waveform[i + 1] * ofGetHeight() / 2.);
     }
+    */
 }
 
 void ofApp::audioOut(ofSoundBuffer& output) {
@@ -53,6 +57,8 @@ void ofApp::audioOut(ofSoundBuffer& output) {
         float value = sampler.playAll();
         output[2 * i] += value;
         output[2 * i + 1] += value;
+        visualizer.update(output[2 * i]);
+        /*
         waveform[waveIndex] = output[2 * i];
 
 
@@ -62,6 +68,7 @@ void ofApp::audioOut(ofSoundBuffer& output) {
         else {
             waveIndex = 0;
         }
+        */
     }
 }
 
@@ -108,7 +115,7 @@ void ofApp::mouseExited(int x, int y) {
 
 //--------------------------------------------------------------
 void ofApp::windowResized(int w, int h) {
-
+    visualizer.resize(0, 0, w, h);
 }
 
 //--------------------------------------------------------------

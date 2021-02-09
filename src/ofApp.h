@@ -3,6 +3,7 @@
 #include "ofMain.h"
 #include "ofxMaxim.h"
 #include "sampler.h"
+#include "visualizer.h"
 
 class ofApp : public ofBaseApp {
 
@@ -40,6 +41,7 @@ private:
     };
 
     ofSoundStream soundStream;
+    Visualizer visualizer;
     float waveform[8192]; //make this bigger, just in case
     int waveIndex;
     vector<Key> keys;
