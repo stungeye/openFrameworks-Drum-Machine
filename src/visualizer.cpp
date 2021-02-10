@@ -11,11 +11,13 @@ void Visualizer::resize(int x, int y, int width, int height) {
 }
 
 void Visualizer::update(double waveformValue) {
-    waveform[waveformIndex] = waveformValue;
+    if (waveform.size() > waveformIndex) {
+        waveform[waveformIndex] = waveformValue;
 
-    ++waveformIndex;
-    if (waveformIndex >= width) {
-        waveformIndex = 0;
+        ++waveformIndex;
+        if (waveformIndex >= width) {
+            waveformIndex = 0;
+        }
     }
 }
 
