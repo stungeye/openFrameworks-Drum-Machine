@@ -14,9 +14,12 @@ void ofApp::setup() {
     for (int i{0}; i < devices.size(); ++i) {
         std::cout << devices[i] << "\n";
     }
-
+    
+    // Device 0 on my machine: [MS ASIO: 0] Voicemeeter AUX Virtual ASIO [in:8 out:8] (default in) (default out)
+    // Using Voicemeeter Banana (VoiceMeeter Input) as the Windows default sound output device.
+    // https://vb-audio.com/Voicemeeter/banana.htm
     settings.setApi(ofSoundDevice::Api::MS_ASIO);
-    settings.setOutDevice(devices[0]);
+    settings.setOutDevice(devices[0]); 
     settings.setOutListener(this);
     settings.sampleRate = sampleRate;
     settings.numOutputChannels = 2;
@@ -25,6 +28,7 @@ void ofApp::setup() {
 
     soundStream.setup(settings);
 
+<<<<<<< HEAD
     shared_ptr<ofxMaxiSample> sound1(new ofxMaxiSample);
     sound1->load(ofToDataPath("roland_tr_909_1.wav"), 1);
     shared_ptr<ofxMaxiSample> sound2(new ofxMaxiSample);
@@ -47,6 +51,21 @@ void ofApp::setup() {
     keys.push_back(Key(sound5, 'g'));
     keys.push_back(Key(sound6, 'h'));
     keys.push_back(Key(sound7, 'p', true));
+=======
+    sampler.add('q', ofToDataPath("roland_tr_909_1.wav"), false);
+    sampler.add('w', ofToDataPath("roland_tr_909_2.wav"), false);
+    sampler.add('e', ofToDataPath("roland_tr_909_3.wav"), false);
+    sampler.add('r', ofToDataPath("roland_tr_909_4.wav"), false);
+    sampler.add('t', ofToDataPath("roland_tr_909_5.wav"), false);
+    sampler.add('y', ofToDataPath("roland_tr_909_6.wav"), false);
+
+    auto loopKeys = { 'z', 'x', 'c', 'v', 'b', 'n', 'm' };
+    for (auto key : loopKeys) {
+        std::stringstream path;
+        path << "breakbeats_" << (int)ofRandom(1, 4) << "_" << (int)ofRandom(1, 6) << ".wav";
+        sampler.add(key, ofToDataPath(path.str()), true);
+    }
+>>>>>>> objectified
 }
 
 //--------------------------------------------------------------
@@ -56,61 +75,28 @@ void ofApp::update() {
 
 //--------------------------------------------------------------
 void ofApp::draw() {
-    /////////////// waveform
-    ofTranslate(0, ofGetHeight() / 2);
-    ofSetColor(0, 255, 0);
-    ofFill();
-    ofDrawLine(0, 0, 1, waveform[1] * ofGetHeight() / 2.); //first line
-    for (int i = 1; i < (ofGetWidth() - 1); ++i) {
-        ofDrawLine(i, waveform[i] * ofGetHeight() / 2., i + 1, waveform[i + 1] * ofGetHeight() / 2.);
-    }
+    visualizer.draw();
 }
 
 void ofApp::audioOut(ofSoundBuffer& output) {
-    std::size_t outChannels = output.getNumChannels();
+    const std::size_t outChannels = output.getNumChannels();
 
-    for (auto i = 0; i < output.getNumFrames(); i++) {
-        for (auto it = keys.begin(); it != keys.end(); it++) {
-            float value{0};
-            if (it->playing && it->loop) {
-                value = it->sample->playLoop(0, 1);
-            }
-            else if (!it->loop) {
-                value = it->sample->playOnce();
-            }
-            output[2 * i] += value;
-            output[2 * i + 1] += value;
-            waveform[waveIndex] = output[2 * i];
-        }
-
-        if (waveIndex < (ofGetWidth() - 1)) {
-            ++waveIndex;
-        }
-        else {
-            waveIndex = 0;
-        }
+    for (std::size_t i = 0; i < output.getNumFrames(); i++) {
+        const auto value = sampler.playAll();
+        output[2 * i] += value;
+        output[2 * i + 1] += value;
+        visualizer.update(output[2 * i]);
     }
 }
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key) {
-    for (auto it = keys.begin(); it != keys.end(); it++) {
-        if (it->triggerLetter == key && !it->playing) {
-            it->playing = true;
-            it->sample->trigger();
-        } else if (it->triggerLetter == key && it->loop) {
-            it->playing = false;
-        }
-    }
+    sampler.keyPressed(key);
 }
 
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key) {
-    for (auto it = keys.begin(); it != keys.end(); it++) {
-        if (it->triggerLetter == key && !it->loop) {
-            it->playing = false;
-        }
-    }
+    sampler.keyReleased(key);
 }
 
 
@@ -146,7 +132,7 @@ void ofApp::mouseExited(int x, int y) {
 
 //--------------------------------------------------------------
 void ofApp::windowResized(int w, int h) {
-
+    visualizer.resize(0, 0, w, h);
 }
 
 //--------------------------------------------------------------

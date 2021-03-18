@@ -2,6 +2,11 @@
 
 #include "ofMain.h"
 #include "ofxMaxim.h"
+<<<<<<< HEAD
+=======
+#include "sampler.h"
+#include "visualizer.h"
+>>>>>>> objectified
 
 class ofApp : public ofBaseApp {
 
@@ -24,22 +29,13 @@ public:
     void audioOut(ofSoundBuffer& output) override;
 
 private:
-
-    struct Key {
-        shared_ptr<ofxMaxiSample> sample;
-        char triggerLetter;
-        bool playing;
-        bool loop;
-        Key(shared_ptr<ofxMaxiSample> _sample, char _triggerLetter, bool _loop = false) {
-            playing = false;
-            sample= _sample;
-            triggerLetter = _triggerLetter;
-            loop = _loop;
-        }
-    };
-
     ofSoundStream soundStream;
+<<<<<<< HEAD
     float waveform[8192]; //make this bigger, just in case
     int waveIndex;
     vector<Key> keys;
+=======
+    Visualizer visualizer;
+    Sampler sampler;
+>>>>>>> objectified
 };

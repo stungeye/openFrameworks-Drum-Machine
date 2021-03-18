@@ -31,6 +31,18 @@
     <ClCompile Include="..\..\..\addons\ofxMaxim\libs\stb_vorbis.c">
       <Filter>addons\ofxMaxim\libs</Filter>
     </ClCompile>
+<<<<<<< HEAD
+=======
+    <ClCompile Include="src\sampler.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sample.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\visualizer.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+>>>>>>> objectified
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -83,6 +95,18 @@
     <ClInclude Include="..\..\..\addons\ofxMaxim\libs\stb_vorbis.h">
       <Filter>addons\ofxMaxim\libs</Filter>
     </ClInclude>
+<<<<<<< HEAD
+=======
+    <ClInclude Include="src\sampler.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sample.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\visualizer.h">
+      <Filter>src</Filter>
+    </ClInclude>
+>>>>>>> objectified
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="icon.rc" />

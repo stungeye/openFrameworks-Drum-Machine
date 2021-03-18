@@ -103,6 +103,7 @@
       <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);..\..\..\addons\ofxMaxim\libs;..\..\..\addons\ofxMaxim\src</AdditionalIncludeDirectories>
       <CompileAs>CompileAsCpp</CompileAs>
       <ObjectFileName>$(IntDir)</ObjectFileName>
+      <LanguageStandard>stdcpp14</LanguageStandard>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -190,6 +191,12 @@
     <ClCompile Include="..\..\..\addons\ofxMaxim\libs\maxiMFCC.cpp" />
     <ClCompile Include="..\..\..\addons\ofxMaxim\libs\maximilian.cpp" />
     <ClCompile Include="..\..\..\addons\ofxMaxim\libs\stb_vorbis.c" />
+<<<<<<< HEAD
+=======
+    <ClCompile Include="src\sample.cpp" />
+    <ClCompile Include="src\sampler.cpp" />
+    <ClCompile Include="src\visualizer.cpp" />
+>>>>>>> objectified
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\ofApp.h" />
@@ -203,6 +210,12 @@
     <ClInclude Include="..\..\..\addons\ofxMaxim\libs\maximilian.h" />
     <ClInclude Include="..\..\..\addons\ofxMaxim\libs\sineTable.h" />
     <ClInclude Include="..\..\..\addons\ofxMaxim\libs\stb_vorbis.h" />
+<<<<<<< HEAD
+=======
+    <ClInclude Include="src\sample.h" />
+    <ClInclude Include="src\sampler.h" />
+    <ClInclude Include="src\visualizer.h" />
+>>>>>>> objectified
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="$(OF_ROOT)\libs\openFrameworksCompiled\project\vs\openframeworksLib.vcxproj">
