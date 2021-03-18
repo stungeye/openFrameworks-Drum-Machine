@@ -8,6 +8,8 @@ Comes with some 909 drum samples triggered when you hit keys 'q' through 'y' and
 
 Also includes an audio visualizer, which was a partial rewrite of code I found on the [oF forum](https://forum.openframeworks.cc/).
 
+Only tested on Windows using Visual Studio 2019.
+
 ### UNLICENSE
 
 This is free and unencumbered software released into the public domain.
