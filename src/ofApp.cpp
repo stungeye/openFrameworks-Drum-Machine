@@ -11,7 +11,7 @@ void ofApp::setup() {
 
     // Needed to use ASIO to get low latency. DS and WASAPI were too laggy.
     auto devices = soundStream.getDeviceList(ofSoundDevice::Api::MS_ASIO);
-    for (int i{0}; i < devices.size(); ++i) {
+    for (auto i{0}; i < devices.size(); ++i) {
         std::cout << devices[i] << "\n";
     }
     
@@ -28,30 +28,7 @@ void ofApp::setup() {
 
     soundStream.setup(settings);
 
-<<<<<<< HEAD
-    shared_ptr<ofxMaxiSample> sound1(new ofxMaxiSample);
-    sound1->load(ofToDataPath("roland_tr_909_1.wav"), 1);
-    shared_ptr<ofxMaxiSample> sound2(new ofxMaxiSample);
-    sound2->load(ofToDataPath("roland_tr_909_2.wav"), 1);
-    shared_ptr<ofxMaxiSample> sound3(new ofxMaxiSample);
-    sound3->load(ofToDataPath("roland_tr_909_3.wav"), 1);
-    shared_ptr<ofxMaxiSample> sound4(new ofxMaxiSample);
-    sound4->load(ofToDataPath("roland_tr_909_4.wav"), 1);
-    shared_ptr<ofxMaxiSample> sound5(new ofxMaxiSample);
-    sound5->load(ofToDataPath("roland_tr_909_5.wav"), 1);
-    shared_ptr<ofxMaxiSample> sound6(new ofxMaxiSample);
-    sound6->load(ofToDataPath("roland_tr_909_6.wav"), 1);
-    shared_ptr<ofxMaxiSample> sound7(new ofxMaxiSample);
-    sound7->load(ofToDataPath("breakbeats_1_1.wav"), 1);
-
-    keys.push_back(Key(sound1, 'a'));
-    keys.push_back(Key(sound2, 's'));
-    keys.push_back(Key(sound3, 'd'));
-    keys.push_back(Key(sound4, 'f'));
-    keys.push_back(Key(sound5, 'g'));
-    keys.push_back(Key(sound6, 'h'));
-    keys.push_back(Key(sound7, 'p', true));
-=======
+    // Add drum hits to the sampler:
     sampler.add('q', ofToDataPath("roland_tr_909_1.wav"), false);
     sampler.add('w', ofToDataPath("roland_tr_909_2.wav"), false);
     sampler.add('e', ofToDataPath("roland_tr_909_3.wav"), false);
@@ -59,13 +36,13 @@ void ofApp::setup() {
     sampler.add('t', ofToDataPath("roland_tr_909_5.wav"), false);
     sampler.add('y', ofToDataPath("roland_tr_909_6.wav"), false);
 
+    // Add drum loops to the sampler:
     auto loopKeys = { 'z', 'x', 'c', 'v', 'b', 'n', 'm' };
     for (auto key : loopKeys) {
         std::stringstream path;
         path << "breakbeats_" << (int)ofRandom(1, 4) << "_" << (int)ofRandom(1, 6) << ".wav";
         sampler.add(key, ofToDataPath(path.str()), true);
     }
->>>>>>> objectified
 }
 
 //--------------------------------------------------------------

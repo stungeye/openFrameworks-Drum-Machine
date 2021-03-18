@@ -1,12 +1,8 @@
 #pragma once
 
 #include "ofMain.h"
-#include "ofxMaxim.h"
-<<<<<<< HEAD
-=======
 #include "sampler.h"
 #include "visualizer.h"
->>>>>>> objectified
 
 class ofApp : public ofBaseApp {
 
@@ -30,12 +26,6 @@ public:
 
 private:
     ofSoundStream soundStream;
-<<<<<<< HEAD
-    float waveform[8192]; //make this bigger, just in case
-    int waveIndex;
-    vector<Key> keys;
-=======
     Visualizer visualizer;
     Sampler sampler;
->>>>>>> objectified
 };
