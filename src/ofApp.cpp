@@ -14,9 +14,12 @@ void ofApp::setup() {
     for (int i{0}; i < devices.size(); ++i) {
         std::cout << devices[i] << "\n";
     }
-
+    
+    // Device 0 on my machine: [MS ASIO: 0] Voicemeeter AUX Virtual ASIO [in:8 out:8] (default in) (default out)
+    // Using Voicemeeter Banana (VoiceMeeter Input) as the Windows default sound output device.
+    // https://vb-audio.com/Voicemeeter/banana.htm
     settings.setApi(ofSoundDevice::Api::MS_ASIO);
-    settings.setOutDevice(devices[0]);
+    settings.setOutDevice(devices[0]); 
     settings.setOutListener(this);
     settings.sampleRate = sampleRate;
     settings.numOutputChannels = 2;

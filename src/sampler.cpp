@@ -4,6 +4,7 @@
 void Sampler::keyPressed(int key) {
     if (keydown.find(key) == keydown.end()) return;
 
+    // Without the keydown vector the sound could trigger repeatedly if we hold a key down.
     if (!keydown[key]) {
         keydown[key] = true;
         samples.at(key).trigger();

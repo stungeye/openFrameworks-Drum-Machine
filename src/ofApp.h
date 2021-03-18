@@ -26,24 +26,7 @@ public:
     void audioOut(ofSoundBuffer& output) override;
 
 private:
-
-    struct Key {
-        shared_ptr<ofxMaxiSample> sample;
-        char triggerLetter;
-        bool playing;
-        bool loop;
-        Key(shared_ptr<ofxMaxiSample> _sample, char _triggerLetter, bool _loop = false) {
-            playing = false;
-            sample= _sample;
-            triggerLetter = _triggerLetter;
-            loop = _loop;
-        }
-    };
-
     ofSoundStream soundStream;
     Visualizer visualizer;
-    float waveform[8192]; //make this bigger, just in case
-    int waveIndex;
-    vector<Key> keys;
     Sampler sampler;
 };

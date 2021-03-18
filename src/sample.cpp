@@ -6,6 +6,7 @@ isLoop(loop),
 isLooping(false)
 {
     sample.load(path, 0);
+    sample.normalise(0.95);
     sample.setPosition(1.0); // Move position to the end so it doesn't start playing.
 }
 
