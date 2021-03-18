@@ -5,21 +5,21 @@
 void ofApp::setup() {
 
     int sampleRate = 48000; // Had to match the 48khz of the VoiceMeeter Asio Virtual Aux 
-    int bufferSize = 7168;  // What does this do to latency?
+    int bufferSize = 7168; // What does this do to latency?
     ofxMaxiSettings::setup(sampleRate, 2, bufferSize);
     ofSoundStreamSettings settings;
 
     // Needed to use ASIO to get low latency. DS and WASAPI were too laggy.
     auto devices = soundStream.getDeviceList(ofSoundDevice::Api::MS_ASIO);
-    for (auto i{0}; i < devices.size(); ++i) {
-        std::cout << devices[i] << "\n";
+    for (const auto& device : devices) {
+        std::cout << device << "\n";
     }
-    
+
     // Device 0 on my machine: [MS ASIO: 0] Voicemeeter AUX Virtual ASIO [in:8 out:8] (default in) (default out)
     // Using Voicemeeter Banana (VoiceMeeter Input) as the Windows default sound output device.
     // https://vb-audio.com/Voicemeeter/banana.htm
     settings.setApi(ofSoundDevice::Api::MS_ASIO);
-    settings.setOutDevice(devices[0]); 
+    settings.setOutDevice(devices[0]);
     settings.setOutListener(this);
     settings.sampleRate = sampleRate;
     settings.numOutputChannels = 2;
@@ -37,10 +37,10 @@ void ofApp::setup() {
     sampler.add('y', ofToDataPath("roland_tr_909_6.wav"), false);
 
     // Add drum loops to the sampler:
-    auto loopKeys = { 'z', 'x', 'c', 'v', 'b', 'n', 'm' };
+    auto loopKeys = {'z', 'x', 'c', 'v', 'b', 'n', 'm'};
     for (auto key : loopKeys) {
         std::stringstream path;
-        path << "breakbeats_" << (int)ofRandom(1, 4) << "_" << (int)ofRandom(1, 6) << ".wav";
+        path << "breakbeats_" << static_cast<int>(ofRandom(1, 4)) << "_" << static_cast<int>(ofRandom(1, 6)) << ".wav";
         sampler.add(key, ofToDataPath(path.str()), true);
     }
 }

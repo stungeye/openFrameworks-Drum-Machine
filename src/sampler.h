@@ -5,9 +5,9 @@
 
 class Sampler {
 public:
-    void keyPressed(int key);
-    void keyReleased(int key);
-    void add(int key, std::string path, bool loop);
+    void keyPressed(const int key);
+    void keyReleased(const int key);
+    void add(const int key, const std::string& path, const bool loop);
     double playAll();
 private:
     unordered_map<int, Sample> samples;

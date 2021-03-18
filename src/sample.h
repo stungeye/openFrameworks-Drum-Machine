@@ -4,7 +4,7 @@
 
 class Sample {
 public:
-    Sample(std::string path, bool loop);
+    Sample(const std::string& path, const bool loop);
     Sample(const Sample& other) = delete;
     double play();
     void trigger();

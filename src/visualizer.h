@@ -3,8 +3,8 @@
 
 class Visualizer {
 public:
-    void resize(int x, int y, int width, int height);
-    void update(double waveformValue);
+    void resize(const int x, const int y, const int width, const int height);
+    void update(const double waveformValue);
     void draw();
 private:
     int x;

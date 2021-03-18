@@ -1,7 +1,7 @@
 #include "visualizer.h"
 #include "ofMain.h"
 
-void Visualizer::resize(int x, int y, int width, int height) {
+void Visualizer::resize(const int x, const int y, const int width, const int height) {
     this->x = x;
     this->y = y;
     this->width = width;
@@ -10,7 +10,7 @@ void Visualizer::resize(int x, int y, int width, int height) {
     waveform.resize(width, 0);
 }
 
-void Visualizer::update(double waveformValue) {
+void Visualizer::update(const double waveformValue) {
     if (waveform.size() > waveformIndex) {
         waveform[waveformIndex] = waveformValue;
 
@@ -26,7 +26,7 @@ void Visualizer::draw() {
     ofSetColor(0, 255, 0);
     ofFill();
     ofDrawLine(0, 0, 1, waveform[1] * height / 2.); //first line
-    for (int i = 1; i < (width - 1); ++i) {
+    for (auto i = 1; i < (width - 1); ++i) {
         ofDrawLine(i, waveform[i] * height / 2., i + 1, waveform[i + 1] * height / 2.);
     }
 }
